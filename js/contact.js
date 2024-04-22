@@ -44,29 +44,6 @@ function validateForm(e) {
       }
   }
   else {
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var comment = document.getElementById("comment").value;
-
-
-    var formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("comment", comment);
-
-    
-    fetch("https://raw.githubusercontent.com/Noahabebe/portfolio/main/send_email.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-       
-        document.getElementById("response").innerHTML = data;
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
     window.redirectToPage();
   }
 }
