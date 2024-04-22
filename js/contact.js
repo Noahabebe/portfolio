@@ -4,49 +4,72 @@ window.redirectToPage = function() {
 
 function validateForm(e) {
   e.preventDefault();
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const comment = document.getElementById("comment");
+  const nameField = document.getElementById("name");
+  const emailField = document.getElementById("email");
+  const commentField = document.getElementById("comment");
   const response = document.getElementById("response");
 
-  let nameValid = name.checkValidity() && !(name.value == null || name.value == "");
-  let emailValid = email.checkValidity() && !(email.value == null || email.value == "");
-  let commentValid = comment.checkValidity() && !(comment.value == null || comment.value == "");
+
+  let nameValid = nameField.checkValidity() && !(nameField.value == null || nameField.value == "");
+  let emailValid = emailField.checkValidity() && !(emailField.value == null || emailField.value == "");
+  let commentValid = commentField.checkValidity() && !(commentField.value == null || commentField.value == "");
 
   if (!nameValid || !emailValid || !commentValid) {
       response.textContent = "Please enter the required information.";
       response.style.color = "red"
 
       if (!nameValid) {
-          name.style.borderStyle = "solid"
-          name.style.borderColor = "red"
+          nameField.style.borderStyle = "solid"
+          nameField.style.borderColor = "red"
       }
       else {
-          name.style.borderStyle = "none"
-          name.style.borderColor = ""
+          nameField.style.borderStyle = "none"
+          nameField.style.borderColor = ""
       }
       if (!emailValid) {
-          email.style.borderStyle = "solid"
-          email.style.borderColor = "red"
+          emailField.style.borderStyle = "solid"
+          emailField.style.borderColor = "red"
       }
       else {
-          email.style.borderStyle = "none"
-          email.style.borderColor = ""
+          emailField.style.borderStyle = "none"
+          emailField.style.borderColor = ""
       }
       if (!commentValid) {
-          comment.style.borderStyle = "solid"
-          comment.style.borderColor = "red"
+          commentField.style.borderStyle = "solid"
+          commentField.style.borderColor = "red"
       }
       else {
-          comment.style.borderStyle = "none"
-          comment.style.borderColor = ""
+          commentField.style.borderStyle = "none"
+          commentField.style.borderColor = ""
       }
   }
   else {
-      window.redirectToPage();
-      response.textContent = "Your response has been recorded.";
-      response.style.color = "rgba(0, 0, 0, 0.5)"
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var comment = document.getElementById("comment").value;
+
+
+    var formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("comment", comment);
+
+    
+    fetch("https://noahabebe.github.io/portfolio/send_email.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+       
+        document.getElementById("response").innerHTML = data;
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+    window.redirectToPage();
   }
 }
 
 document.getElementById("submit").addEventListener("click", validateForm);
+
