@@ -1,0 +1,77 @@
+#wrapper {
+    padding: 17px 17px 0px 17px;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+    border-radius: 0px 0px 50px 50px;
+}
+
+.cmdimage{
+  display: inline;
+  background-color: transparent;
+  background-image: url('https://github.com/favicon.ico');
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.nexusimage{
+  display: inline;
+  background-color: #FAF1E5;
+  background-image: url('https://noahabebe.github.io/portfolio/nexus.png');
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+.instockimage{
+  display: inline;
+  background-color: transparent;
+  background-image: url('https://noahabebe.github.io/portfolio/instock.png');
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+#menu {
+    background-color: limegreen;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    padding: 12px 15px 25px 15px;
+    max-width: 600px;
+    width: fit-content;
+}
+
+#moodForm {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#moods {
+    display: inline;
+    position: sticky;
+    margin-right: 10px;
+    max-width: 400px;
+    width: 30vw;
+    height: 49px;
+    padding-left: 10px;
+    font-family: "Cabin";
+    font-size: 24px;
+    border-color: 0px;
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 386px) {
+    #moods {
+        width: 100%;
+    }
+}

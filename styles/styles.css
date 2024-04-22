@@ -1,0 +1,177 @@
+@import url('https://fonts.cdnfonts.com/css/nasalization-2');
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Cabin:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+@keyframes colorchange {
+    0% {
+        background-color: rgba(13, 110, 253, 0.5);
+    }
+
+    
+    25% {
+        background-color: rgba(25, 135, 84, 0.5);
+    }
+
+   
+    50% {
+        background-color: rgba(220, 53, 69, 0.5);
+    }
+
+   
+    75% {
+        background-color: rgb(188, 94, 232, 0.5);
+    }
+
+  
+    100% {
+        background-color: rgba(13, 110, 253, 0.5);
+    }
+
+   
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 320px;
+    animation: colorchange 30s infinite;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 25px 25px 0px 25px;
+    margin: -8px;
+    background-color: lightpurple;
+}
+
+
+nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+nav a {
+    color: #000;
+    text-decoration: none;
+}
+
+nav a:hover {
+    transition: color ease-out;
+    color: rgb(82, 71, 110);
+
+}
+
+nav a:active {
+    transition: color ease-out;
+    color: rgb(80, 89, 188);
+
+}
+
+
+main {
+    padding-bottom: 20vh;
+}
+
+
+#titlegroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    max-width: 600px;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer {
+    bottom: -1%;
+    font-family: "Cabin";
+    font-size: small;
+    text-align: center;
+    padding-top: 10px;
+    height: 40px;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: #00000066;
+   background:linear-gradient(to bottom, rgba(255,255,255,0.55),rgba(255,255,255,0.25));
+   left:0;
+   -webkit-backdrop-filter: blur(5px);
+   backdrop-filter: blur(5px);
+    border-radius: 50px 50px 0px 0px;
+    position: fixed;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.403);
+}
+
+#nameOfWebsite {
+    font-family: Bungee;
+    font-size: 24px;
+}
+
+#rightSide {
+    display: flex;
+    font-size: 20px;
+    gap: 20px;
+    font-family: "Cabin";
+    
+}
+
+input[type="submit"] {
+
+    display: inline;
+    font-family: "Cabin";
+    font-size: 24px;
+    padding: 10px 15px;
+    color: white;
+    border-style: none;
+    border-radius: 10px;
+    background-color: rgb(82, 137, 255);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.403);
+
+
+}
+
+input[type="submit"]:hover {
+
+    background-color: rgb(95, 156, 255);
+
+}
+
+input[type="submit"]:active {
+
+    background-color: rgb(42, 88, 255);
+    box-shadow: inset 0px 4px 5px rgba(0, 0, 0, 0.403);
+
+}
+
+.title {
+    font-family: "Cabin";
+    font-size: 48px;
+    text-align: center;
+}
+
+.box-shadow {
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.403);
+}
+
+@media screen and (max-width:390px) {
+    nav {
+        flex-wrap: wrap;
+    }
+
+    #nameOfWebsite {
+        font-family: 'Nasalization', sans-serif;
+        font-size: 40px;
+        margin-right: 20px;
+    }
+}

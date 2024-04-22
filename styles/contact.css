@@ -1,0 +1,67 @@
+.title {
+    font-family: "Cabin";
+    font-size: 48px;
+}
+img {
+  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+  
+}
+#contact{
+  margin-top: 20%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+form {
+    border-radius: 40px;
+    width: 80%;
+    height: 380px;
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    padding-top: 25px;
+  background:linear-gradient(to bottom, rgba(255,255,255,0.55),rgba(255,255,255,0.25));
+  left:0;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+
+    margin-bottom: 10px;
+    display: inline;
+    font-family: "Cabin";
+    font-size: 20px;
+    padding: 10px 15px;
+    border-style: none;
+    border-width: 1px;
+    border-radius: 10px;
+    background-color: white;
+
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.403);
+    width: 80%;
+    /* Adjust this value to change the width of the text boxes */
+    margin-left: 0%;
+    /* Adjust this value to change the left margin of the text boxes */
+}
+
+
+#submitButton {
+
+    width: 94%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#response {
+    font-family: "Cabin";
+    text-align: left;
+    margin-left: 7%;
+    color: rgba(0, 0, 0, 0.5);
+}
