@@ -55,7 +55,7 @@ function validateForm(e) {
     formData.append("comment", comment);
 
     
-    fetch("https://noahabebe.github.io/portfolio/send_email.php", {
+    fetch("https://raw.githubusercontent.com/Noahabebe/portfolio/main/send_email.php", {
         method: "POST",
         body: formData
     })
