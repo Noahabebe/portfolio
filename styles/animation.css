@@ -58,6 +58,7 @@ select:focus, input:focus, button:focus{
     span{
       background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5) 90%, transparent);
       text-transform: uppercase;
+      font-family: 'Nasalization', sans-serif;
       line-height: 0.76em;
       position: absolute;
       color: $white;
