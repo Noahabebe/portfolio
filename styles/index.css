@@ -1,15 +1,3 @@
-.tech-animation {
-    display: flex;
-    justify-content: center; /* Centers the animation */
-    margin: 20px 0; /* Adds space around the animation */
-}
-
-.tech-animation img {
-    width: 80%; /* Adjusts the width of the animation */
-    max-width: 600px; /* Sets a maximum width */
-    border-radius: 15px; /* Adds rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
-}
 
 .cardgroup {
     padding: 20px; /* Adds padding around the cards */
