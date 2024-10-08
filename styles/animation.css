@@ -40,7 +40,6 @@ select:focus, input:focus, button:focus{
     border-radius: 15px; /* Rounded corners */
     background-color: var(--primary-dark); /* Use CSS variables for better maintainability */
     /* Optional styles for visual enhancement */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
     transition: background-color 0.3s ease; /* Smooth transition for hover effects */
 }
 
