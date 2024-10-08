@@ -31,23 +31,19 @@ select:focus, input:focus, button:focus{
   outline:none;
 }
 
-/* -------- BODY DISPLAY --------- */
-body {
-
-background-color: $primary-dark;
-overflow: hidden;
-
-display: flex;
-  // flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-min-height: 100vh;
-}
 
 /* -------- TYPE SELECTORS --------- */
 
 /* -------- CLASS --------- */
+.name-animation {
+    position: relative; /* Allows for absolute positioning of inner elements */
+    overflow: hidden; /* Prevents overflow of animated elements */
+    width: 100%; /* You can set a fixed width if you want */
+    height: 200px; /* Adjust height based on your animation's dimensions */
+    display: flex;
+    justify-content: center; /* Center the animation */
+    align-items: center; /* Center the animation vertically */
+}
 
 .container{
   display: flex;
