@@ -21,6 +21,7 @@
   margin-bottom: 10px;
 }
 
+
 .nexusimage{
   display: inline;
   background-color: #FAF1E5;
@@ -49,6 +50,31 @@
   display: inline;
   background-color: transparent;
   background-image: url('https://noahabebe.github.io/portfolio/instock.png');
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+
+.ecodriveimage{
+  display: inline;
+  background-color: transparent;
+  background-image: url('https://noahabebe.github.io/portfolio/ecodrive.png');
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.gencalimage{
+  display: inline;
+  background-color: transparent;
+  background-image: url('https://noahabebe.github.io/portfolio/gencal.png');
   width: 120px;
   height: 120px;
   object-fit: cover;
