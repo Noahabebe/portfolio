@@ -5,3 +5,13 @@
 }
 
 
+.profileimage{
+  display: inline;
+  background-image: url('https://noahabebe.github.io/portfolio/profile.png');
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
