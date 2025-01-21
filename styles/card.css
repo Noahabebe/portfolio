@@ -3,6 +3,7 @@
     flex-direction: column;
     align-content: center;
     margin: auto;
+    animation: fadeIn 1s ease-in-out; /* Added fade-in animation */
 }
 
 .card {
@@ -15,12 +16,18 @@
     max-width: 750px;
     border-radius: 40px;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.403);
-    background:linear-gradient(to bottom, rgba(255,255,255,0.55),rgba(255,255,255,0.25));
-    left:0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.25));
+    left: 0;
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     z-index: 1000;
     cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Subtle zoom effect on hover */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
 }
 
 .cardimage {
@@ -34,12 +41,9 @@
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.403);
 }
 
-
-
 .info {
     display: inline;
     width: 60%;
-
 }
 
 .name {
@@ -59,7 +63,7 @@
 .taglist {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px
+    gap: 5px;
 }
 
 .tag {
@@ -71,10 +75,6 @@
     color: white;
     font-size: 18px;
 }
-
-/*.tag:hover {
-    background-color: rgba(71, 48, 152, 0.637);
-}*/
 
 .playbutton {
     display: inline-flex;
@@ -101,20 +101,16 @@
     display: none;
 }
 
-@media screen and (max-width:750px) {
+@media screen and (max-width: 750px) {
     .playbutton {
         justify-content: left;
         margin-top: 30px;
         width: 85%;
         height: 50px;
         background-color: black;
-
     }
 
-
-
     .playicon {
-
         display: none;
         width: 0px;
         height: 0px;
@@ -132,15 +128,27 @@
     }
 }
 
-@media screen and (min-width:751px) {
+@media screen and (min-width: 751px) {
     .card {
         flex-wrap: nowrap;
     }
 }
 
-@media screen and (max-width:437px) {
+@media screen and (max-width: 437px) {
     .card {
         width: 60vw;
         justify-content: left;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
