@@ -1,113 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Student at Seneca">
-    <meta name="robots" content="index, follow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noah Abebe | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/nasalization-2');
 
-    <meta property="og:title" content="About Me - Noah Abebe">
-    <meta property="og:description" content="This is my personal website portfolio where I share information about my works and my projects.">
-    <meta property="og:image" content="https://noahabebe.github.io/profile.png">
-    <meta property="og:url" content="https://noahabebe.github.io/aboutme.html">
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
 
-    <title>NOAH ABEBE</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="stylesheet" href="./styles/index.css">
-    <link rel="stylesheet" href="./styles/card.css">
-    <link rel="stylesheet" href="./styles/animation.css">
-    <link rel="icon" href="https://noahabebe.github.io/portfolio/noahabebe.png" type="image/x-icon" />
+    #nameOfWebsite {
+        font-family: 'Nasalization', sans-serif;
+        font-size: 40px;
+        margin-right: 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50px;
+    position: fixed; /* floating effect */
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%; /* increase width to almost full page */
+    max-width: 1400px; /* optional max width */
+    z-index: 1000;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    padding: 0.5rem 1rem;
+    }
+
+
+    .navbar .btn {
+      background: #fff;
+      color: #000;
+      margin: 0 0.3rem;
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    .navbar .btn:hover {
+      background: #6c63ff;
+      color: #fff;
+      box-shadow: 0 0 15px #6c63ff;
+    }
+
+    /* Sections */
+    section {
+      position: relative;
+      padding: 100px 20px 50px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Slanted divider */
+    .divider {
+      width: 100%;
+      height: 60px;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 60px;
+    }
+    .divider svg polygon {
+      fill: #111;
+    }
+
+    /* About Section */
+    #about {
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    .typing {
+      font-size: 2.5rem;
+      font-weight: bold;
+      border-right: 3px solid #6c63ff;
+      white-space: nowrap;
+      overflow: hidden;
+      margin-top: 50px;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.7s infinite;
+    }
+    @keyframes typing {
+      from { width: 0; } to { width: 100%; }
+    }
+    @keyframes blink {
+      0%,50% { border-color: #6c63ff; }
+      51%,100% { border-color: transparent; }
+    }
+
+    /* Cards */
+    .card {
+      background: #2c2f3d;
+      border: none;
+      border-radius: 1.5rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      transition: transform 0.4s, opacity 0.6s;
+      opacity: 0;
+      padding: 1.5rem;
+      width: 100%;
+      min-height: 180px;
+      color: #fff;
+    }
+    .card h5, .card p { color: #fff; }
+    .card.show { opacity: 1; transform: translateY(0); }
+    .card.collapsed-content p { display: none; }
+    .card .toggle-details {
+      cursor: pointer; font-size: 0.9rem; color: #ccc; text-align: right; margin-top: 0.5rem;
+    }
+    .skill-tags span {
+      background: #6c63ff; color: #fff; border-radius: 1rem; padding: 0.2rem 0.6rem; font-size: 0.8rem;
+      margin: 0.2rem; display: inline-block;
+    }
+    .see-more {
+      display: block; margin: 20px auto; background: #6c63ff; border: none; color: #fff;
+      padding: 0.6rem 1.2rem; border-radius: 2rem; box-shadow: 0 0 10px #6c63ff; transition: all 0.3s ease;
+    }
+    .see-more:hover { background: #4e46e5; box-shadow: 0 0 20px #6c63ff; }
+
+    /* Skills section */
+    #skills .badge {
+      font-size: 0.9rem;
+      margin: 0.3rem;
+      padding: 0.6rem 1rem;
+      border-radius: 1rem;
+      background: #000;
+      color: #fff;
+    }
+
+    /* Section colors */
+    .section-black { background: #111; color: #fff; }
+    .section-white { background: #fff; color: #000; }
+
+    /* Responsive cards width */
+    @media (min-width:768px) {
+      .row .col-md-6 { flex: 0 0 48%; max-width: 48%; }
+    }
+
+  </style>
 </head>
-
 <body>
-    <header id="wrapper" class="box-shadow">
-        <nav>
-            <div id="nameOfWebsite">
-                <a style="font-family: 'Nasalization', sans-serif;" href="./index.html">NOAH ABEBE</a>
-            </div>
 
-            <div id="rightSide">
-                <div id="about">
-                    <a class="cabin-regular" href="./aboutme.html">ABOUT</a>
-                </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container-fluid d-flex justify-content-between">
+      <a class="navbar-brand" style="font-family: 'Nasalization', sans-serif;" id="nameOfWebsite" href="#about">Noah Abebe</a>
+      <div>
+        <a class="btn" href="#about">About</a>
+        <a class="btn" href="#experience">Experience</a>
+        <a class="btn" href="#skills">Skills</a>
+        <a class="btn" href="#projects">Projects</a>
+        <a class="btn" href="#education">Education</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-                <div id="contactUs">
-                    <a class="cabin-regular" href="./contact.html">CONTACT ME!</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <!-- About Section -->
+  <section id="about">
+    <div class="typing">I'm Noah Abebe,</div>
+    <p class="lead mt-3">I'd like to think that I'm more than just one thing.<br>But ultimately, my career leans towards Computer Programming.</p>
+  </section>
 
-    <p class="name">Top Projects:</p>
-    <main class="cardgroup">
-       
+  <div class="divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon points="0,100 100,0 100,100"/>
+    </svg>
+  </div>
 
-
-        <div class="card" style="align-items: center" onclick="window.location.href='https://ecodrive.noahabebe.com';">
-            <img class="ecodriveimage">
-            <div class="info">
-                <p class="name">EcoDrive</p>
-                <div class="taglist">
-                    <span class="tag">Uber/Lyft Fuel Saving Platform</span>
-                </div>
-            </div>
+  <!-- Work Experience -->
+  <section id="experience" class="section-black">
+    <div class="container">
+      <h2>Work Experience</h2>
+      <div class="row g-4" id="experience-list">
+        <div class="col-md-6">
+          <div class="card collapsed-content">
+            <h5>Ontario Health | Service Desk Agent</h5>
+            <p>Providing remote troubleshooting, ticket management, and ITIL-standard support.</p>
+            <div class="skill-tags"><span>ITIL</span><span>Support</span></div>
+            <div class="toggle-details">▼ More</div>
+          </div>
         </div>
-
-         <div class="card" style="align-items: center" onclick="window.location.href='https://www.gencal.noahabebe.com/';">
-            <img class="gencalimage">
-            <div class="info">
-                <p class="name">GenCal</p>
-                <div class="taglist">
-                    <span class="tag">Calendar Generator Platform</span>
-                </div>
-            </div>
+        <div class="col-md-6">
+          <div class="card collapsed-content">
+            <h5>Gatestone | Bilingual Technical Support</h5>
+            <p>Bilingual support, resolving issues for healthcare providers via Bomgar & TCN systems.</p>
+            <div class="skill-tags"><span>Bomgar</span><span>Communication</span></div>
+            <div class="toggle-details">▼ More</div>
+          </div>
         </div>
-        
-        <div class="card" style="align-items: center" onclick="window.location.href='https://www.noahabebe.com/baymax.html';">
-            <img class="baymaximage">
-            <div class="info">
-                <p class="name">Baymax</p>
-                <div class="taglist">
-                    <span class="tag">System Integrated Advanced AI Model</span>
-                </div>
-            </div>
+        <div class="col-md-6">
+          <div class="card collapsed-content">
+            <h5>Extra Ed Inc | Lead Robotics Instructor</h5>
+            <p>Designed and taught robotics curriculum, mentoring students in building and coding robots.</p>
+            <div class="skill-tags"><span>Robotics</span><span>Teaching</span></div>
+            <div class="toggle-details">▼ More</div>
+          </div>
         </div>
+      </div>
+      <button class="see-more" id="experience-more">See More</button>
+    </div>
+  </section>
 
-        <div class="card" style="align-items: center" onclick="window.location.href='https://noahabebe.github.io/Nexus/';">
-            <img class="nexusimage">
-            <div class="info">
-                <p class="name">Nexus</p>
-                <div class="taglist">
-                    <span class="tag">Multi-type News Platform </span>
-                </div>
-            </div>
+  <div class="divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon points="0,0 100,100 0,100"/>
+    </svg>
+  </div>
+
+  <!-- Skills -->
+  <section id="skills" class="section-white">
+    <div class="container text-center">
+      <h2>Skills</h2>
+      <div>
+        <span class="badge">Python</span>
+        <span class="badge">C++</span>
+        <span class="badge">Java</span>
+        <span class="badge">JavaScript</span>
+        <span class="badge">SQL</span>
+        <span class="badge">HTML/CSS</span>
+        <span class="badge">C#</span>
+        <span class="badge">MATLAB</span>
+        <span class="badge">React</span>
+        <span class="badge">Node.js</span>
+        <span class="badge">Flask</span>
+        <span class="badge">Docker</span>
+        <span class="badge">Git</span>
+        <span class="badge">Agile & Waterfall</span>
+        <span class="badge">Robotics</span>
+        <span class="badge">AI/ML</span>
+        <span class="badge">Data Analysis</span>
+        <span class="badge">Web Development</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon points="0,100 100,0 100,100"/>
+    </svg>
+  </div>
+
+  <!-- Projects -->
+  <section id="projects" class="section-black">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="row g-4" id="projects-list">
+        <div class="col-md-6">
+          <div class="card collapsed-content">
+            <h5>GenCAL</h5>
+            <p>A universal calendar app using words & pictures to create events, exporting to .ics format.</p>
+            <div class="skill-tags"><span>Web</span><span>JSON</span></div>
+            <div class="toggle-details">▼ More</div>
+          </div>
         </div>
-
-        <div class="card" style="align-items: center" onclick="window.location.href='https://instock247.glitch.me/';">
-            <img class="instockimage">
-            <div class="info">
-                <p class="name">Instock247</p>
-                 <div class="taglist">
-                    <span class="tag">Stock Management Platform</span>
-                </div>
-            </div>
+        <div class="col-md-6">
+          <div class="card collapsed-content">
+            <h5>EcoDrive</h5>
+            <p>A web app for Uber/Lyft drivers predicting fuel costs, profit, and routes with real-time data.</p>
+            <div class="skill-tags"><span>Data</span><span>Visualization</span></div>
+            <div class="toggle-details">▼ More</div>
+          </div>
         </div>
-
-        <div class="card" style="align-items: center" onclick="window.location.href='https://github.com/Noahabebe/cmdscripter';">
-            <img class="cmdimage">
-            <div class="info">
-                <p class="name">CMD Scripter</p>
-                <div class="taglist">
-                    <span class="tag">Description to Command Platform</span>
-                </div>
-            </div>
+        <div class="col-md-6">
+          <div class="card collapsed-content">
+            <h5>Netrix</h5>
+            <p>A smart scraping & analysis platform for social media and web content using LLMs & graphs.</p>
+            <div class="skill-tags"><span>LLM</span><span>Scraping</span></div>
+            <div class="toggle-details">▼ More</div>
+          </div>
         </div>
-    </main>
+      </div>
+      <button class="see-more" id="projects-more">See More</button>
+    </div>
+  </section>
 
-    <footer>
-        <span> &copy 2025 Noah Abebe. All rights reserved.</span>
-    </footer>
+  <div class="divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon points="0,0 100,100 0,100"/>
+    </svg>
+  </div>
+
+  <!-- Education -->
+  <section id="education" class="section-white">
+    <div class="container">
+      <h2>Education</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card">
+            <h5>Seneca Polytechnic</h5>
+            <p>Computer Programming (2023 - 2025)</p>
+            <div class="skill-tags"><span>Diploma</span></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <h5>Collège Français</h5>
+            <p>High School Diploma (2019 - 2023)</p>
+            <div class="skill-tags"><span>Academic Excellence</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon points="0,100 100,0 100,100"/>
+    </svg>
+  </div>
+
+  <!-- Contact -->
+  <section id="contact" class="section-black text-center">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Connect with me through my professional networks:</p>
+      <a href="https://www.noahabebe.com" class="btn btn-outline-light rounded-pill m-2">Website</a>
+      <a href="https://www.linkedin.com/in/noahabebe/" class="btn btn-outline-light rounded-pill m-2">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer class="section-black text-center py-3 mb-0">
+    © 2025 Noah Abebe | Portfolio
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle card details
+   // Toggle card details
+    function addToggleListeners() {
+    document.querySelectorAll('.toggle-details').forEach(toggle => {
+        toggle.replaceWith(toggle.cloneNode(true)); // reset previous listeners
+    });
+
+    document.querySelectorAll('.toggle-details').forEach(toggle => {
+        toggle.addEventListener('click', () => {
+        const card = toggle.closest('.card');
+        const p = card.querySelector('p');
+        if (p.style.display === 'block') {
+            p.style.display = 'none';
+            toggle.textContent = '▼ More';
+        } else {
+            p.style.display = 'block';
+            toggle.textContent = '▲ Less';
+        }
+        });
+    });
+    }
+
+    // Animate cards on scroll
+    function animateCards() {
+        const cards = document.querySelectorAll('.card'); // update NodeList
+        window.addEventListener('scroll', () => {
+            cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) card.classList.add('show');
+            });
+        });
+    }
+
+    addToggleListeners();
+    animateCards();
+
+    // "See More" buttons for Experience & Projects
+    document.getElementById('experience-more').addEventListener('click', () => {
+        const container = document.getElementById('experience-list');
+        container.innerHTML += `
+            <div class="col-md-6"><div class="card collapsed-content"><h5>FIRST Robotics Canada | Mentor</h5><p>Assisted student robotics teams with technical design and leadership in competitions.</p><div class="skill-tags"><span>Mentoring</span><span>Robotics</span></div><div class="toggle-details">▼ More</div></div></div>
+            <div class="col-md-6"><div class="card collapsed-content"><h5>Nexus | Founder</h5><p>Developed a scalable AI-driven platform integrating multiple news sources and user content.</p><div class="skill-tags"><span>AI</span><span>Leadership</span></div><div class="toggle-details">▼ More</div></div></div>
+            <div class="col-md-6"><div class="card collapsed-content"><h5>LIC | Full Stack Developer</h5><p>Developed responsive websites, automated RFP retrieval, and built web scraping tools.</p><div class="skill-tags"><span>Full Stack</span><span>Automation</span></div><div class="toggle-details">▼ More</div></div></div>
+        `;
+        document.getElementById('experience-more').remove();
+        addToggleListeners();
+        animateCards(); // re-apply scroll animation to new cards
+    });
+
+    document.getElementById('projects-more').addEventListener('click', () => {
+        const container = document.getElementById('projects-list');
+        container.innerHTML += `
+            <div class="col-md-6"><div class="card collapsed-content"><h5>Clonify</h5><p>A 3D x Robotics startup building systems that merge robotics and AI-powered automation.</p><div class="skill-tags"><span>3D</span><span>Robotics</span></div><div class="toggle-details">▼ More</div></div></div>
+            <div class="col-md-6"><div class="card collapsed-content"><h5>FTC Robotics Challenge</h5><p>Developed robot programming to solve mazes, detect objects, and navigate rotating obstacles.</p><div class="skill-tags"><span>Programming</span><span>Sensors</span></div><div class="toggle-details">▼ More</div></div></div>
+            <div class="col-md-6"><div class="card collapsed-content"><h5>ASR for Ge’ez/Amharic Chants</h5><p>Built a speech-to-text + chant classifier system for religious chants using deep learning.</p><div class="skill-tags"><span>Deep Learning</span><span>ASR</span></div><div class="toggle-details">▼ More</div></div></div>
+        `;
+        document.getElementById('projects-more').remove();
+        addToggleListeners();
+        animateCards(); // re-apply scroll animation to new cards
+    });
+  </script>
 </body>
-
 </html>
