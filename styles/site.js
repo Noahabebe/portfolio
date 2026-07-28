@@ -52,31 +52,24 @@
     b.setAttribute('aria-label', 'Play the robotics mini-game');
     b.setAttribute('role', 'button');
     b.innerHTML =
-      '<div class="speech">Tap to play! 🤖</div>' +
+      '<div class="speech">play</div>' +
       '<svg class="bob" viewBox="0 0 74 82" width="74" height="82" xmlns="http://www.w3.org/2000/svg">' +
-        '<defs>' +
-          '<linearGradient id="rb" x1="0" y1="0" x2="1" y2="1">' +
-            '<stop offset="0" stop-color="#8b6bff"/><stop offset="1" stop-color="#6c63ff"/>' +
-          '</linearGradient>' +
-        '</defs>' +
         // antenna
-        '<line x1="37" y1="6" x2="37" y2="16" stroke="#8b6bff" stroke-width="3" stroke-linecap="round"/>' +
-        '<circle cx="37" cy="5" r="4" fill="#17c3c3"><animate attributeName="opacity" values="1;0.35;1" dur="1.6s" repeatCount="indefinite"/></circle>' +
+        '<line x1="37" y1="6" x2="37" y2="16" stroke="#3f4cc4" stroke-width="3" stroke-linecap="round"/>' +
+        '<circle cx="37" cy="5" r="4" fill="#3f4cc4"><animate attributeName="opacity" values="1;0.35;1" dur="1.8s" repeatCount="indefinite"/></circle>' +
         // head
-        '<rect x="15" y="16" width="44" height="34" rx="12" fill="url(#rb)"/>' +
-        '<rect x="21" y="24" width="32" height="18" rx="9" fill="#eaf2ff"/>' +
+        '<rect x="15" y="16" width="44" height="34" rx="12" fill="#23252b"/>' +
+        '<rect x="21" y="24" width="32" height="18" rx="9" fill="#f5f3ee"/>' +
         // eyes
-        '<circle class="eyeL" cx="31" cy="33" r="4" fill="#2b2f52"/>' +
-        '<circle class="eyeR" cx="43" cy="33" r="4" fill="#2b2f52"/>' +
-        // cheeks
-        '<circle cx="24" cy="38" r="2" fill="#ff9fb0"/><circle cx="50" cy="38" r="2" fill="#ff9fb0"/>' +
+        '<circle class="eyeL" cx="31" cy="33" r="3.6" fill="#23252b"/>' +
+        '<circle class="eyeR" cx="43" cy="33" r="3.6" fill="#23252b"/>' +
         // body
-        '<rect x="20" y="50" width="34" height="18" rx="8" fill="#b9c6ff"/>' +
-        '<circle cx="37" cy="59" r="4" fill="#17c3c3"/>' +
+        '<rect x="20" y="50" width="34" height="18" rx="8" fill="#c9c3b6"/>' +
+        '<circle cx="37" cy="59" r="4" fill="#3f4cc4"/>' +
         // wheels
         '<g class="wheels">' +
-          '<circle cx="26" cy="70" r="6" fill="#4a5170"/><circle cx="26" cy="70" r="2" fill="#eaf2ff"/>' +
-          '<circle cx="48" cy="70" r="6" fill="#4a5170"/><circle cx="48" cy="70" r="2" fill="#eaf2ff"/>' +
+          '<circle cx="26" cy="70" r="6" fill="#23252b"/><circle cx="26" cy="70" r="2" fill="#f5f3ee"/>' +
+          '<circle cx="48" cy="70" r="6" fill="#23252b"/><circle cx="48" cy="70" r="2" fill="#f5f3ee"/>' +
         '</g>' +
       '</svg>';
     document.body.appendChild(b);
@@ -106,8 +99,8 @@
       overlay.innerHTML =
         '<div class="game-shell">' +
           '<div class="game-head">' +
-            '<div class="g-title">🤖 Bolt Runner <span style="font-weight:400;color:var(--ink-faint);font-size:0.8rem">— hop to collect bolts</span></div>' +
-            '<div class="g-score">⚙ <b id="gScore">0</b></div>' +
+            '<div class="g-title">Bolt Runner</div>' +
+            '<div class="g-score">gears <b id="gScore">0</b></div>' +
           '</div>' +
           '<canvas id="gameCanvas"></canvas>' +
           '<div class="game-foot">' +
@@ -169,13 +162,13 @@
       ctx.clearRect(0, 0, W, H);
 
       // ground line
-      ctx.strokeStyle = 'rgba(108,99,255,0.25)';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(35,37,43,0.28)';
+      ctx.lineWidth = 1.5;
       ctx.beginPath(); ctx.moveTo(0, groundY); ctx.lineTo(W, groundY); ctx.stroke();
       // dashed circuitry on ground
-      ctx.strokeStyle = 'rgba(23,195,195,0.35)';
-      ctx.setLineDash([6, 10]);
-      ctx.beginPath(); ctx.moveTo(0, groundY + 8); ctx.lineTo(W, groundY + 8); ctx.stroke();
+      ctx.strokeStyle = 'rgba(63,76,196,0.3)';
+      ctx.setLineDash([5, 11]);
+      ctx.beginPath(); ctx.moveTo(0, groundY + 7); ctx.lineTo(W, groundY + 7); ctx.stroke();
       ctx.setLineDash([]);
 
       // physics
@@ -189,16 +182,16 @@
       speed += 0.0009;
 
       // obstacles
-      ctx.fillStyle = '#ff7a8a';
+      ctx.fillStyle = '#b4533a';
       for (var i = obstacles.length - 1; i >= 0; i--) {
         var o = obstacles[i]; o.x -= speed;
-        // draw hazard cone / block
-        roundRect(o.x, groundY - o.h, o.w, o.h, 4);
-        ctx.fillStyle = '#ff7a8a'; ctx.fill();
+        // draw hazard block
+        roundRect(o.x, groundY - o.h, o.w, o.h, 3);
+        ctx.fillStyle = '#b4533a'; ctx.fill();
         // stripe
-        ctx.fillStyle = 'rgba(255,255,255,0.6)';
-        ctx.fillRect(o.x, groundY - o.h * 0.55, o.w, 3);
-        ctx.fillStyle = '#ff7a8a';
+        ctx.fillStyle = 'rgba(245,243,238,0.7)';
+        ctx.fillRect(o.x, groundY - o.h * 0.55, o.w, 2.5);
+        ctx.fillStyle = '#b4533a';
         // collision
         if (robot.x + robot.r > o.x && robot.x - robot.r < o.x + o.w && robot.y + robot.r > groundY - o.h) {
           bump();
@@ -254,39 +247,37 @@
 
     function drawGear(cx, cy, r, rot) {
       ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot);
-      ctx.fillStyle = '#ffb547';
+      ctx.fillStyle = '#3f4cc4';
       var teeth = 8;
       for (var i = 0; i < teeth; i++) {
         ctx.rotate((Math.PI * 2) / teeth);
-        ctx.fillRect(-2.4, -r - 3, 4.8, 5);
+        ctx.fillRect(-2.2, -r - 3, 4.4, 5);
       }
       ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, 0, r * 0.42, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#f5f3ee'; ctx.beginPath(); ctx.arc(0, 0, r * 0.42, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
     }
 
     function drawRobot(cx, cy, r) {
       // shadow
-      ctx.fillStyle = 'rgba(80,70,180,0.14)';
+      ctx.fillStyle = 'rgba(40,38,30,0.12)';
       ctx.beginPath(); ctx.ellipse(cx, groundY + 2, r, 4, 0, 0, Math.PI * 2); ctx.fill();
       ctx.save(); ctx.translate(cx, cy);
       // body
-      var grd = ctx.createLinearGradient(-r, -r, r, r);
-      grd.addColorStop(0, '#8b6bff'); grd.addColorStop(1, '#6c63ff');
-      ctx.fillStyle = grd;
-      roundRect(-r, -r, r * 2, r * 2, 8); ctx.fill();
+      ctx.fillStyle = '#23252b';
+      roundRect(-r, -r, r * 2, r * 2, 7); ctx.fill();
       // face plate
-      ctx.fillStyle = '#eaf2ff';
-      roundRect(-r + 4, -r + 5, r * 2 - 8, r + 2, 6); ctx.fill();
+      ctx.fillStyle = '#f5f3ee';
+      roundRect(-r + 4, -r + 5, r * 2 - 8, r + 2, 5); ctx.fill();
       // eyes
-      ctx.fillStyle = '#2b2f52';
+      ctx.fillStyle = '#23252b';
       var blink = (Math.floor(now() / 140) % 24 === 0) ? 1 : 5;
-      ctx.beginPath(); ctx.arc(-5, -3, 2.6, 0, Math.PI * 2); ctx.fill();
-      ctx.fillRect(3, -3 - blink / 2, 3.4, blink);
+      ctx.beginPath(); ctx.arc(-5, -3, 2.4, 0, Math.PI * 2); ctx.fill();
+      ctx.fillRect(3, -3 - blink / 2, 3.2, blink);
       // antenna
-      ctx.strokeStyle = '#17c3c3'; ctx.lineWidth = 2;
+      ctx.strokeStyle = '#3f4cc4'; ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(0, -r); ctx.lineTo(0, -r - 6); ctx.stroke();
-      ctx.fillStyle = '#17c3c3'; ctx.beginPath(); ctx.arc(0, -r - 8, 2.6, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#3f4cc4'; ctx.beginPath(); ctx.arc(0, -r - 8, 2.4, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
     }
 
