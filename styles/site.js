@@ -90,8 +90,8 @@
     var overlay, canvas, ctx, scoreEl, loadFill, titleEl, hintEl, skipBtn;
     var raf = null, running = false, mode = 'transition', destination = null;
     var W = 600, H = 190, DPR = 1;
-    var robot, obstacles, bolts, score, speed, spawnT, boltT, groundY, startTime, minMs;
-    var closing = false;
+    var robot, obstacles, bolts, score, speed, spawnT, boltT, groundY;
+    var closing = false, won = false, target = 8;
 
     function build() {
       overlay = document.createElement('div');
@@ -140,9 +140,16 @@
     function reset() {
       robot = { x: 62, y: 0, vy: 0, r: 16, onGround: true, blink: 0 };
       obstacles = []; bolts = [];
-      score = 0; speed = 3.4; spawnT = 40; boltT = 26;
+      score = 0; speed = 2.1; spawnT = 60; boltT = 30;
+      won = false;
       robot.y = groundY - robot.r;
-      if (scoreEl) scoreEl.textContent = '0';
+      updateScore();
+    }
+
+    function updateScore() {
+      if (!scoreEl) return;
+      scoreEl.textContent = (mode === 'transition') ? (score + ' / ' + target) : score;
+      if (mode === 'transition' && loadFill) loadFill.style.width = Math.min(score / target, 1) * 100 + '%';
     }
 
     function hop() {
@@ -154,8 +161,9 @@
       obstacles.push({ x: W + 20, w: 16 + Math.random() * 10, h: hgt });
     }
     function spawnBolt() {
-      var hover = groundY - (30 + Math.random() * 60);
-      bolts.push({ x: W + 20, y: hover, r: 9, spin: 0, got: false });
+      // keep gears within an easy jump arc so the level is winnable, not fiddly
+      var hover = groundY - (22 + Math.random() * 42);
+      bolts.push({ x: W + 20, y: hover, r: 10, spin: 0, got: false });
     }
 
     function step() {
@@ -172,14 +180,15 @@
       ctx.setLineDash([]);
 
       // physics
-      robot.vy += 0.5; robot.y += robot.vy;
+      robot.vy += 0.42; robot.y += robot.vy;
       if (robot.y >= groundY - robot.r) { robot.y = groundY - robot.r; robot.vy = 0; robot.onGround = true; }
 
-      // spawns
-      if (--spawnT <= 0) { spawnObstacle(); spawnT = Math.max(58 - score * 0.4, 34) + Math.random() * 30; }
-      if (--boltT <= 0) { spawnBolt(); boltT = 40 + Math.random() * 40; }
+      // spawns (paced so obstacles are dodgeable and gears reachable)
+      if (--spawnT <= 0) { spawnObstacle(); spawnT = 80 + Math.random() * 45; }
+      if (--boltT <= 0) { spawnBolt(); boltT = 45 + Math.random() * 35; }
 
-      speed += 0.0009;
+      // very gentle ramp, capped so it never gets frantic
+      if (!won) speed = Math.min(speed + 0.0004, 3.1);
 
       // obstacles
       ctx.fillStyle = '#b4533a';
@@ -205,19 +214,28 @@
         drawGear(g.x, g.y, g.r, g.spin);
         var dx = g.x - robot.x, dy = g.y - robot.y;
         if (Math.sqrt(dx * dx + dy * dy) < g.r + robot.r) {
-          score++; if (scoreEl) scoreEl.textContent = score;
-          bolts.splice(j, 1); continue;
+          score++; updateScore();
+          bolts.splice(j, 1);
+          if (mode === 'transition' && score >= target && !won) winLevel();
+          continue;
         }
         if (g.x < -20) bolts.splice(j, 1);
       }
 
       drawRobot(robot.x, robot.y, robot.r);
 
-      // loader progress in transition mode
-      if (mode === 'transition') {
-        var pct = Math.min((now() - startTime) / minMs, 1);
-        if (loadFill) loadFill.style.width = (pct * 100) + '%';
-        if (pct >= 1) { finish(); return; }
+      // "Level complete" banner once the target is reached (transition mode)
+      if (won) {
+        ctx.fillStyle = 'rgba(245,243,238,0.72)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#23252b';
+        ctx.font = '600 20px Fraunces, Georgia, serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Level complete', W / 2, H / 2 - 4);
+        ctx.fillStyle = '#3f4cc4';
+        ctx.font = '400 12px "JetBrains Mono", monospace';
+        ctx.fillText('continuing…', W / 2, H / 2 + 18);
+        ctx.textAlign = 'left';
       }
 
       if (running) raf = requestAnimationFrame(step);
@@ -225,10 +243,17 @@
 
     function now() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
 
+    function winLevel() {
+      won = true;
+      hintEl.textContent = 'Nice — level cleared';
+      // let the banner show briefly, then continue to the destination
+      setTimeout(finish, 850);
+    }
+
     function bump() {
       // gentle penalty: knock robot back, small score loss, screen shake
-      robot.vy = -5; robot.onGround = false;
-      score = Math.max(0, score - 1); if (scoreEl) scoreEl.textContent = score;
+      robot.vy = -4.2; robot.onGround = false;
+      score = Math.max(0, score - 1); updateScore();
       overlay.querySelector('.game-shell').animate(
         [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
         { duration: 220 }
@@ -286,19 +311,18 @@
       if (!overlay) build();
       mode = m || 'transition';
       destination = dest;
-      closing = false;
-      minMs = mode === 'transition' ? 1500 : 999999; // freeplay runs until skip
+      closing = false; won = false;
+      target = 6;
       overlay.classList.add('active');
       resize(); // must run while overlay is visible so canvas has real dimensions
-      startTime = now();
       reset();
       running = true;
       if (mode === 'freeplay') {
-        hintEl.textContent = 'Free play — Space / tap to hop, Esc to close';
+        hintEl.textContent = 'Space / tap to hop · Esc to close';
         loadFill.parentNode.style.display = 'none';
         skipBtn.textContent = 'Close ✕';
       } else {
-        hintEl.textContent = 'Loading next page — hop while you wait!';
+        hintEl.textContent = 'Collect ' + target + ' gears to continue — or Skip';
         loadFill.parentNode.style.display = '';
         skipBtn.textContent = 'Skip →';
       }
