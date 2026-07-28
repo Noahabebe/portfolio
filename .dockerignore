@@ -1,0 +1,10 @@
+# keep the build context (and image) lean — exclude repo/dev cruft.
+# NOTE: do not ignore Dockerfile or nginx.conf — nginx.conf is COPYed in.
+.git
+.github
+.gitignore
+.dockerignore
+*.md
+LICENSE
+.DS_Store
+Thumbs.db
