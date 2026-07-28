@@ -1,72 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTACT ME</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-    <Link rel="stylesheet" href="./styles/contact.css">
-    <link rel="stylesheet" href="./styles/card.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Noah Abebe</title>
+  <meta name="description" content="Get in touch with Noah Abebe — IT Support & ITSM Specialist and Full-Stack Developer in Toronto.">
+  <link rel="icon" href="noahabebe.png">
+  <link rel="stylesheet" href="./styles/theme.css">
 </head>
+<body>
 
-<body id="wrapper">
-    <header>
-        <nav id="header">
-            <div id="nameOfWebsite">
-                <a style="font-family: 'Nasalization';"href="./index.html">Noah Abebe</a>
-            </div>
+  <div class="aurora"><span></span><span></span><span></span><span></span></div>
+  <div id="scrollProgress"></div>
 
-            <div id="rightSide">
-                <div id="about">
-                    <a class="cabin-regular" href="./aboutme.html">ABOUT</a>
-                </div>
+  <!-- Navbar -->
+  <nav class="glass-nav">
+    <a class="brand" href="index.html">Noah<span>.</span>Abebe</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="aboutme.html">About</a>
+      <a class="cta" href="contact.html">Contact</a>
+    </div>
+  </nav>
 
-                <div id="contactUs">
-                    <a class="cabin-regular" href="./contact.html">CONTACT ME!</a>
-                </div>
-            </div>
-        </nav>
+  <section class="section" style="padding-top:150px;min-height:100vh;">
+    <div class="container-x">
+      <div class="grid cols-2" style="align-items:stretch;">
 
-        <main id="titlegroup">
-            <a class="title">Contact Me!</a>
-            <form action="https://formspree.io/f/xrgnrybn" method="POST" class="box-shadow">
-                <input type="text" id="name" name="name" placeholder="Name"><br><br>
-                <input type="email" id="email" name="email" placeholder="Email"><br><br>
-                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Comment"></textarea><br>
-                <div id="submitButton">
-                    <p id="response"></p>
-                    <input id="submit" type="submit" value="SUBMIT">
-                </div>
-            </form>
+        <!-- Left: intro + channels -->
+        <div class="reveal">
+          <span class="eyebrow">Say hello</span>
+          <h1 class="section-title" style="font-size:clamp(2rem,5vw,3.2rem);">Let's talk 👋</h1>
+          <p class="section-sub" style="margin-bottom:1.8rem;">
+            Have a project, a role, or a robotics program in mind? Drop me a message and I'll get back to you.
+            You can also reach me directly through any of these channels.
+          </p>
 
-          <div id="contact">
-          <a href="https://www.linkedin.com/in/noahabebe/">
-           <div id="LinkedIn">
-             <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn">
-            
-           </div>
-            </a>
-            <a href="https://github.com/Noahabebe">
-            <div id="GitHub">
-              <img src="https://github.com/favicon.ico" alt="GitHub">
-              
-            </div>
-            </a>
-            <a href="https://www.instagram.com/iamnoahabebe/">
-            <div id="insta">
-              <img src="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png" alt="Instagram">
-            </div>
+          <a class="glass-card reveal" href="mailto:mail@noahabebe.com" data-no-game style="display:flex;align-items:center;gap:1rem;text-decoration:none;margin-bottom:1rem;">
+            <div class="card-icon" style="margin:0;">✉️</div>
+            <div><h4 style="margin:0;">Email</h4><div class="meta" style="margin:0;">mail@noahabebe.com</div></div>
           </a>
+          <a class="glass-card reveal" href="https://noahabebe.com" target="_blank" style="display:flex;align-items:center;gap:1rem;text-decoration:none;margin-bottom:1rem;">
+            <div class="card-icon" style="margin:0;">🌐</div>
+            <div><h4 style="margin:0;">Website</h4><div class="meta" style="margin:0;">noahabebe.com</div></div>
+          </a>
+          <div class="glass-card reveal" style="display:flex;align-items:center;gap:1rem;">
+            <div class="card-icon" style="margin:0;">📍</div>
+            <div><h4 style="margin:0;">Based in</h4><div class="meta" style="margin:0;">Toronto, ON · Available remotely</div></div>
+          </div>
+
+          <div class="social-row" style="justify-content:flex-start;margin-top:1.6rem;">
+            <a href="https://www.linkedin.com/in/noahabebe/" target="_blank" aria-label="LinkedIn">in</a>
+            <a href="https://github.com/Noahabebe" target="_blank" aria-label="GitHub">GH</a>
+            <a href="https://www.instagram.com/iamnoahabebe/" target="_blank" aria-label="Instagram">IG</a>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="glass-card reveal" style="padding:2rem;">
+          <span class="accent-bar"></span>
+          <h3 style="margin-top:0.4rem;">Send a message</h3>
+          <p style="color:var(--ink-soft);font-size:0.92rem;margin-bottom:1.2rem;">I usually reply within a day or two.</p>
+          <form action="https://formspree.io/f/xrgnrybn" method="POST" id="contactForm">
+            <label class="fld">
+              <span>Name</span>
+              <input type="text" name="name" placeholder="Your name" required>
+            </label>
+            <label class="fld">
+              <span>Email</span>
+              <input type="email" name="email" placeholder="you@example.com" required>
+            </label>
+            <label class="fld">
+              <span>Message</span>
+              <textarea name="comment" rows="5" placeholder="Tell me a bit about what you need…" required></textarea>
+            </label>
+            <button type="submit" class="btn-glow" style="width:100%;justify-content:center;margin-top:0.4rem;">Send message →</button>
+            <p id="formResponse" style="text-align:center;font-size:0.9rem;margin:0.9rem 0 0;color:var(--mint);"></p>
+          </form>
+        </div>
+
       </div>
-        </main>
+    </div>
+  </section>
 
-    </header>
+  <footer class="site-footer">
+    <div class="social-row">
+      <a href="https://www.linkedin.com/in/noahabebe/" target="_blank" aria-label="LinkedIn">in</a>
+      <a href="https://github.com/Noahabebe" target="_blank" aria-label="GitHub">GH</a>
+      <a href="https://www.instagram.com/iamnoahabebe/" target="_blank" aria-label="Instagram">IG</a>
+    </div>
+    <div>© 2026 Noah Abebe · Built with glass, gears &amp; a little robot 🤖</div>
+  </footer>
 
-    <footer>
-        <span>&copy 2025 Noah Abebe. All rights reserved.</span>
-    </footer>
-    <script src="../js/contact.js"></script>
+  <style>
+    .fld { display:block; margin-bottom:1rem; }
+    .fld span { display:block; font-size:0.82rem; font-weight:600; color:var(--ink-soft); margin-bottom:0.4rem; }
+    .fld input, .fld textarea {
+      width:100%; padding:0.8rem 1rem; border-radius:14px;
+      border:1px solid var(--glass-border); background:rgba(255,255,255,0.7);
+      font-family:'Poppins',sans-serif; font-size:0.95rem; color:var(--ink);
+      transition:border 0.25s, box-shadow 0.25s; resize:vertical;
+    }
+    .fld input:focus, .fld textarea:focus {
+      outline:none; border-color:var(--brand); box-shadow:0 0 0 4px rgba(108,99,255,0.15);
+    }
+  </style>
+
+  <script src="./styles/site.js"></script>
+  <script>
+    // AJAX submit to Formspree so the user stays on the page
+    var form = document.getElementById('contactForm');
+    var resp = document.getElementById('formResponse');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      resp.style.color = 'var(--ink-soft)';
+      resp.textContent = 'Sending…';
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (r) {
+        if (r.ok) {
+          form.reset();
+          resp.style.color = 'var(--mint)';
+          resp.textContent = '✓ Thanks! Your message is on its way.';
+        } else {
+          resp.style.color = 'var(--coral)';
+          resp.textContent = 'Something went wrong — email me directly at mail@noahabebe.com';
+        }
+      }).catch(function () {
+        resp.style.color = 'var(--coral)';
+        resp.textContent = 'Network error — please email mail@noahabebe.com';
+      });
+    });
+  </script>
 </body>
-
 </html>

@@ -1,66 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABOUT</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-    <Link rel="stylesheet" href="./styles/about.css">
-    <link rel="stylesheet" href="./styles/card.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Noah Abebe</title>
+  <meta name="description" content="About Noah Abebe — bilingual IT support & ITSM specialist, full-stack developer and robotics coach in Toronto.">
+  <link rel="icon" href="noahabebe.png">
+  <link rel="stylesheet" href="./styles/theme.css">
 </head>
+<body>
 
-<body id="wrapper">
-    <header>
-        <nav id="header">
-            <div id="nameOfWebsite">
-                <a style="font-family: 'Nasalization';" href="./index.html">Noah Abebe</a>
-            </div>
+  <div class="aurora"><span></span><span></span><span></span><span></span></div>
+  <div id="scrollProgress"></div>
 
-            <div id="rightSide">
-                <div id="about">
-                    <a class="cabin-regular" href="./aboutme.html">ABOUT</a>
-                </div>
+  <nav class="glass-nav">
+    <a class="brand" href="index.html">Noah<span>.</span>Abebe</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="aboutme.html">About</a>
+      <a class="cta" href="contact.html">Contact</a>
+    </div>
+  </nav>
 
-                <div id="contactUs">
-                    <a class="cabin-regular" href="./contact.html">CONTACT ME!</a>
-                </div>
-            </div>
-        </nav>
-        <div id="titlegroup">
-            <div class="title">
-                <a">About Me!</a>
-            </div>
-
-            <div class="paragraph">
-                <p>Hi, this is Noah.<br>I'd like to think that I'm more than just one thing.<br>But ultimately, my career leans towards Computer Programming.
-                </p>
-            </div>
+  <section class="section" style="padding-top:150px;">
+    <div class="container-x">
+      <div class="grid cols-2" style="align-items:center;">
+        <div class="reveal">
+          <span class="eyebrow">About me</span>
+          <h1 class="section-title" style="font-size:clamp(2rem,5vw,3.2rem);">Hi, this is Noah.</h1>
+          <p class="section-sub" style="margin-bottom:1rem;">
+            I'd like to think that I'm more than just one thing — but ultimately my career leans toward
+            <b>computer programming</b> and building things that help people.
+          </p>
+          <p style="color:var(--ink-soft);line-height:1.75;">
+            By day I keep provincial healthcare IT running smoothly on BMC Remedy ITSM; by night I build full-stack
+            products and coach the next generation of roboticists. I'm bilingual (EN/FR), fluent in Amharic, and
+            endlessly curious about where software, hardware and language meet.
+          </p>
+          <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1.6rem;">
+            <a class="btn-glow" href="index.html#projects">See my work →</a>
+            <a class="btn-ghost" href="contact.html">Contact me</a>
+          </div>
         </div>
-
-    </header>
-
-    
-    <main class="cardgroup">
-      
-        <div class="card">
-        
-            <img class="profileimage">
-            <div class="info">
-                <p class="name">Noah Abebe</p>
-                <p class="desc">A student at seneca college</p>
-                <div class="taglist">
-                    <span class="tag">Computer Programming</span>
-                </div>
-            </div>
+        <div class="reveal" style="justify-self:center;">
+          <div class="glass-card" style="padding:0.6rem;border-radius:30px;max-width:340px;">
+            <img src="profile.png" alt="Noah Abebe" style="width:100%;border-radius:24px;display:block;">
+          </div>
         </div>
+      </div>
 
-       
-       
-    </main>
-    <footer>
-        <span>&copy 2025 Noah Abebe;. All rights reserved.</span>
-    </footer>
+      <div class="grid cols-3" style="margin-top:3rem;">
+        <div class="glass-card reveal"><div class="card-icon">🛠️</div><h4>IT &amp; ITSM</h4><p>BMC Remedy, ServiceNow, Active Directory, Bomgar — supporting 10,000+ staff in public-sector healthcare.</p></div>
+        <div class="glass-card reveal"><div class="card-icon">💻</div><h4>Full-Stack</h4><p>React, Next.js, Node.js, FastAPI, PostgreSQL &amp; more — from backend services to polished front-ends.</p></div>
+        <div class="glass-card reveal"><div class="card-icon">🤖</div><h4>Robotics</h4><p>WPILib, ROS, Arduino &amp; Isaac Sim — coaching thousands of students and mentoring FRC teams.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="social-row">
+      <a href="https://www.linkedin.com/in/noahabebe/" target="_blank" aria-label="LinkedIn">in</a>
+      <a href="https://github.com/Noahabebe" target="_blank" aria-label="GitHub">GH</a>
+      <a href="https://www.instagram.com/iamnoahabebe/" target="_blank" aria-label="Instagram">IG</a>
+    </div>
+    <div>© 2026 Noah Abebe · Built with glass, gears &amp; a little robot 🤖</div>
+  </footer>
+
+  <script src="./styles/site.js"></script>
 </body>
-
 </html>
