@@ -1,72 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTACT ME</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-    <Link rel="stylesheet" href="./styles/contact.css">
-    <link rel="stylesheet" href="./styles/card.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Noah Abebe</title>
+  <meta name="description" content="Get in touch with Noah Abebe — IT support & ITSM specialist and full-stack developer in Toronto.">
+  <link rel="icon" href="noahabebe.png">
+  <link rel="stylesheet" href="./styles/theme.css">
 </head>
+<body>
 
-<body id="wrapper">
-    <header>
-        <nav id="header">
-            <div id="nameOfWebsite">
-                <a style="font-family: 'Nasalization';"href="./index.html">Noah Abebe</a>
-            </div>
+  <div id="scrollProgress"></div>
 
-            <div id="rightSide">
-                <div id="about">
-                    <a class="cabin-regular" href="./aboutme.html">ABOUT</a>
-                </div>
+  <nav class="glass-nav">
+    <a class="brand" href="index.html">Noah<span>.</span>Abebe</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#projects">Work</a>
+      <a href="aboutme.html">About</a>
+      <a class="cta" href="contact.html">Contact</a>
+    </div>
+  </nav>
 
-                <div id="contactUs">
-                    <a class="cabin-regular" href="./contact.html">CONTACT ME!</a>
-                </div>
-            </div>
-        </nav>
+  <section class="section" style="padding-top:150px;min-height:90vh;">
+    <div class="container-x">
+      <div class="grid cols-2" style="align-items:start;gap:3rem;">
 
-        <main id="titlegroup">
-            <a class="title">Contact Me!</a>
-            <form action="https://formspree.io/f/xrgnrybn" method="POST" class="box-shadow">
-                <input type="text" id="name" name="name" placeholder="Name"><br><br>
-                <input type="email" id="email" name="email" placeholder="Email"><br><br>
-                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Comment"></textarea><br>
-                <div id="submitButton">
-                    <p id="response"></p>
-                    <input id="submit" type="submit" value="SUBMIT">
-                </div>
-            </form>
+        <div class="reveal">
+          <span class="eyebrow">Contact</span>
+          <h1 class="section-title">Let's talk.</h1>
+          <p class="section-sub" style="margin-bottom:2rem;">
+            Have a project, a role, or a robotics program in mind? Send a note below, or reach me directly through
+            any of these.
+          </p>
 
-          <div id="contact">
-          <a href="https://www.linkedin.com/in/noahabebe/">
-           <div id="LinkedIn">
-             <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn">
-            
-           </div>
-            </a>
-            <a href="https://github.com/Noahabebe">
-            <div id="GitHub">
-              <img src="https://github.com/favicon.ico" alt="GitHub">
-              
-            </div>
-            </a>
-            <a href="https://www.instagram.com/iamnoahabebe/">
-            <div id="insta">
-              <img src="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png" alt="Instagram">
-            </div>
+          <a class="glass-card reveal" href="mailto:mail@noahabebe.com" data-no-game style="display:block;text-decoration:none;margin-bottom:0.9rem;">
+            <div class="kicker"><span>Email</span><span class="no">↗</span></div>
+            <h4 style="margin:0;">mail@noahabebe.com</h4>
           </a>
+          <a class="glass-card reveal" href="https://noahabebe.com" target="_blank" style="display:block;text-decoration:none;margin-bottom:0.9rem;">
+            <div class="kicker"><span>Website</span><span class="no">↗</span></div>
+            <h4 style="margin:0;">noahabebe.com</h4>
+          </a>
+          <div class="glass-card reveal">
+            <div class="kicker"><span>Based in</span><span class="no">CA</span></div>
+            <h4 style="margin:0;">Toronto, ON — available remotely</h4>
+          </div>
+
+          <div class="social-row" style="margin-top:1.6rem;">
+            <a href="https://www.linkedin.com/in/noahabebe/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Noahabebe" target="_blank">GitHub</a>
+            <a href="https://www.instagram.com/iamnoahabebe/" target="_blank">Instagram</a>
+          </div>
+        </div>
+
+        <div class="glass-card reveal" style="padding:2rem;">
+          <div class="kicker"><span>Send a message</span><span class="no">↳</span></div>
+          <p style="color:var(--ink-soft);font-size:0.94rem;margin:0 0 1.3rem;">I usually reply within a day or two.</p>
+          <form action="https://formspree.io/f/xrgnrybn" method="POST" id="contactForm">
+            <label class="fld"><span>Name</span><input type="text" name="name" placeholder="Your name" required></label>
+            <label class="fld"><span>Email</span><input type="email" name="email" placeholder="you@example.com" required></label>
+            <label class="fld"><span>Message</span><textarea name="comment" rows="5" placeholder="A few lines about what you need…" required></textarea></label>
+            <button type="submit" class="btn-glow" style="width:100%;justify-content:center;margin-top:0.3rem;">Send message</button>
+            <p id="formResponse" style="text-align:center;font-size:0.86rem;font-family:var(--mono);margin:0.9rem 0 0;"></p>
+          </form>
+        </div>
+
       </div>
-        </main>
+    </div>
+  </section>
 
-    </header>
+  <footer class="site-footer">
+    <div>© 2026 Noah Abebe · Toronto, ON</div>
+    <div class="social-row">
+      <a href="https://www.linkedin.com/in/noahabebe/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/Noahabebe" target="_blank">GitHub</a>
+      <a href="https://www.instagram.com/iamnoahabebe/" target="_blank">Instagram</a>
+    </div>
+  </footer>
 
-    <footer>
-        <span>&copy 2025 Noah Abebe. All rights reserved.</span>
-    </footer>
-    <script src="../js/contact.js"></script>
+  <style>
+    .fld { display:block; margin-bottom:0.9rem; }
+    .fld span { display:block; font-family:var(--mono); font-size:0.74rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:0.4rem; }
+    .fld input, .fld textarea {
+      width:100%; padding:0.75rem 0.9rem; border-radius:10px;
+      border:1px solid var(--line); background:rgba(255,255,255,0.6);
+      font-family:var(--sans); font-size:0.95rem; color:var(--ink);
+      transition:border 0.2s, box-shadow 0.2s; resize:vertical;
+    }
+    .fld input:focus, .fld textarea:focus {
+      outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);
+    }
+  </style>
+
+  <script src="./styles/site.js"></script>
+  <script>
+    var form = document.getElementById('contactForm');
+    var resp = document.getElementById('formResponse');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      resp.style.color = 'var(--ink-faint)';
+      resp.textContent = 'Sending…';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+        .then(function (r) {
+          if (r.ok) { form.reset(); resp.style.color = 'var(--accent)'; resp.textContent = 'Thanks — your message is on its way.'; }
+          else { resp.style.color = 'var(--accent-2)'; resp.textContent = 'Something went wrong — email mail@noahabebe.com'; }
+        })
+        .catch(function () { resp.style.color = 'var(--accent-2)'; resp.textContent = 'Network error — please email mail@noahabebe.com'; });
+    });
+  </script>
 </body>
-
 </html>
