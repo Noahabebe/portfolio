@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microbot Swarm: sealed, wireless, modular robotics</title>
+<meta name="description" content="Interactive exploded view of a 40 mm sealed microbot and its wireless charging hub.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#060906;--bone:#e8ede2;--mut:#7f8b78;--sig:#8dff4a;--cu:#ffb04a;--line:rgba(232,237,226,.16)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:auto}
+body{background:var(--ink);color:var(--bone);font:400 16px/1.55 'Schibsted Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block}
+section{position:relative;min-height:100vh;display:flex;align-items:center;padding:0 6vw;pointer-events:none}
+section *{pointer-events:auto}
+.p{width:min(430px,100%)}
+.p.end{align-self:flex-end;padding-bottom:12vh}
+h1,h2{font-weight:800;letter-spacing:-.03em;line-height:1.02}
+h1{font-size:clamp(40px,5.6vw,84px);margin-bottom:22px}
+h2{font-size:clamp(30px,3.6vw,52px);margin-bottom:18px}
+p{color:#b9c3b2;max-width:46ch}
+.stats{display:flex;gap:34px;margin-top:34px;border-top:1px solid var(--line);padding-top:18px}
+.stats b{display:block;font-size:26px;font-weight:700;color:var(--bone);letter-spacing:-.02em}
+.stats span{font-size:13px;color:var(--mut)}
+.fm{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 18px}
+button{font:inherit;font-weight:500;font-size:14px;color:var(--bone);background:none;border:1px solid var(--line);padding:9px 16px;border-radius:99px;cursor:pointer;transition:.2s}
+button:hover{border-color:var(--sig)}
+button.on{background:var(--sig);color:#0a1204;border-color:var(--sig)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--sig);outline-offset:3px}
+.cmd{font-size:14px;color:var(--mut);border-left:2px solid var(--sig);padding-left:14px;max-width:40ch}
+.cmd b{color:var(--bone);font-weight:500}
+#s4{align-items:flex-start;padding-top:16vh;padding-bottom:12vh}
+.w{width:min(980px,100%);margin-left:auto;display:grid;grid-template-columns:1.1fr 1fr;gap:6vw}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{color:var(--mut);width:36%;padding-right:12px}
+ol{list-style:none;padding:0;counter-reset:n}
+li{counter-increment:n;display:grid;grid-template-columns:34px 1fr;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;color:#b9c3b2}
+li::before{content:counter(n);color:var(--sig);font-weight:700}
+li b{display:block;color:var(--bone);font-weight:500}
+.note{grid-column:1/-1;font-size:12px;color:var(--mut);max-width:80ch}
+h3{font-size:17px;font-weight:700;margin-bottom:10px}
+#labels{position:fixed;inset:0;pointer-events:none;z-index:3}
+.lb{position:absolute;left:0;top:0;padding-left:64px;opacity:0;width:300px;will-change:transform}
+.lb::before{content:'';position:absolute;left:4px;top:50%;width:54px;height:1px;background:var(--sig)}
+.lb::after{content:'';position:absolute;left:0;top:50%;width:9px;height:9px;margin-top:-4px;border:1px solid var(--sig);border-radius:50%;background:var(--ink)}
+.lb b{display:block;font-size:14px;font-weight:700}
+.lb span{display:block;font-size:12.5px;color:var(--mut);line-height:1.35}
+#hud{position:fixed;z-index:5;left:6vw;right:6vw;bottom:calc(3vh + 20px);display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}
+#cap{font-size:13px;color:var(--mut)}
+#exw{pointer-events:auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--mut);opacity:0;transition:opacity .4s}
+input[type=range]{accent-color:var(--sig);width:150px}
+#nav{position:fixed;z-index:5;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
+#nav button{width:9px;height:9px;padding:0;border-radius:50%;background:var(--line);border:0}
+#nav button.on{background:var(--sig)}
+#brand{position:fixed;z-index:5;left:6vw;top:calc(3vh + 22px);font-weight:800;letter-spacing:-.02em;font-size:17px;display:flex;gap:10px;align-items:center}
+#brand i{width:22px;height:11px;border-radius:6px;background:var(--sig);position:relative}
+#brand i::after{content:'';position:absolute;left:7px;top:4px;width:8px;height:3px;border-radius:2px;background:var(--ink)}
+.bar{position:fixed;left:0;right:0;height:3vh;background:#000;z-index:6}
+.vig{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 60% 50%,transparent 45%,rgba(0,0,0,.7))}
+.gr{position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");animation:g .6s steps(4) infinite}
+@keyframes g{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}}
+#intro{position:fixed;inset:0;background:var(--ink);z-index:20;transition:opacity 1.6s ease .3s;pointer-events:none}
+body.ready #intro{opacity:0}
+@media(max-width:900px){.lb{display:none}.w{grid-template-columns:1fr}#nav{display:none}.p.end{padding-bottom:18vh}section{align-items:flex-end;padding-bottom:16vh}#s4{padding-bottom:12vh}}
+@media(prefers-reduced-motion:reduce){.gr{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="intro"></div><div class="vig"></div><div class="gr"></div>
+<div class="bar" style="top:0"></div><div class="bar" style="bottom:0"></div>
+<div id="brand"><i></i>Microbot Swarm</div>
+<div id="labels"></div>
+<nav id="nav" aria-label="Sections"></nav>
+<div id="hud"><div id="cap"></div>
+<label id="exw">Explode <input id="ex" type="range" min="0" max="1" step=".01" value="1" aria-label="Explode amount"></label></div>
+
+<section id="s0"><div class="p end">
+<h1>A swarm that charges, connects and reshapes itself.</h1>
+<p>Forty-millimetre sealed microbots with no exposed pins. They charge through the shell, talk over a local mesh, and move into the shape you ask for.</p>
+<div class="stats"><div><b>40 × 8 mm</b><span>per unit</span></div><div><b>0</b><span>exposed contacts</span></div><div><b>120 mAh</b><span>LiPo stick cell</span></div></div>
+</div></section>
+
+<section id="s1"><div class="p">
+<h2>Inside one microbot</h2>
+<p>A slim shell wraps four layers: a receiver coil, a rigid-flex board, and a cylindrical cell. Everything sits behind a continuous wall, so the unit charges wirelessly and stays sealed. Drag to rotate, or use the slider to pull the layers apart.</p>
+</div></section>
+
+<section id="s2"><div class="p">
+<h2>The hub is the charger, the brain and the case</h2>
+<p>Machined cradles hold each bot flush. A transmitter coil sits under every bay, centred on the bot's receiver coil. The hub also runs Wi-Fi, Bluetooth and the microphone array that listens for commands.</p>
+</div></section>
+
+<section id="s3"><div class="p">
+<h2>Say it, and they form it</h2>
+<p>The hub turns a spoken request into one target position per bot, then broadcasts the targets over the mesh. Try a formation.</p>
+<div class="fm" role="group" aria-label="Formation">
+<button class="on" data-f="Mark">Mark</button><button data-f="Ring">Ring</button><button data-f="Tetra">Pyramid</button><button data-f="Grid">Grid</button></div>
+<div class="cmd" id="cmd"></div>
+</div></section>
+
+<section id="s4"><div class="w">
+<div><h2>Designed to be validated before it is built</h2>
+<table>
+<tr><td>Processor</td><td>ESP32-S3 Mini per bot; ESP32-S3-WROOM-1 in the hub</td></tr>
+<tr><td>Power in</td><td>TDK WR202020-18M8-G receiver sheet with STWLC38 rectifier and charger</td></tr>
+<tr><td>Battery</td><td>3.7 V, 120 mAh LiPo stick; 50 mA trickle charge ceiling</td></tr>
+<tr><td>Sensing</td><td>6-axis IMU for position and telemetry</td></tr>
+<tr><td>Network</td><td>ESP-NOW peer-to-peer mesh, no router needed</td></tr>
+<tr><td>Hub audio</td><td>I2S microphone array, 3 W speaker</td></tr>
+<tr><td>Shell</td><td>Tough polycarbonate-like resin, SLA printed</td></tr>
+</table></div>
+<div><h3>Path to a working swarm</h3>
+<ol>
+<li><span><b>Model</b>Shell and hub in CAD; rigid-flex board in KiCad; merged in FreeCAD for collision checks.</span></li>
+<li><span><b>Simulate</b>OpenEMS for coil coupling, OpenFOAM for heat in the sealed cavity, Gazebo or PyBullet for swarm motion.</span></li>
+<li><span><b>Prototype</b>SLA shells, folded flex boards, magnetic closure, first hub.</span></li>
+<li><span><b>Demonstrate</b>Voice command to formation on real hardware.</span></li></ol></div>
+<p class="note">Figures are design targets from the internal architecture plan. They have not yet been measured on hardware. The plan also lists an alternative 12 × 45 mm envelope to fit the board and battery; this presentation shows the 40 × 8 mm blueprint.</p>
+</div></section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const T=THREE,$=s=>document.querySelector(s),ss=x=>x*x*(3-2*x),cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const R=new T.WebGLRenderer({canvas:$('#c'),antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+const sc=new T.Scene();sc.background=new T.Color(0x050805);sc.fog=new T.FogExp2(0x050805,.022);
+const cam=new T.PerspectiveCamera(40,1,.1,200);
+sc.add(new T.AmbientLight(0x6a8060,.55));
+const key=new T.DirectionalLight(0xffffff,1.1);key.position.set(5,8,6);sc.add(key);
+const rim=new T.PointLight(0x8dff4a,1.6,40);rim.position.set(-6,2,-4);sc.add(rim);
+const warm=new T.PointLight(0xffb04a,.7,30);warm.position.set(6,-3,5);sc.add(warm);
+
+const LIME=0x8dff4a;
+const M=(c,o={})=>new T.MeshStandardMaterial(Object.assign({color:c,roughness:.5,metalness:.1},o));
+const shellMat=new T.MeshPhysicalMaterial({color:0x9dff6a,transparent:true,opacity:.26,roughness:.15,side:T.DoubleSide,depthWrite:false});
+const wireMat=new T.LineBasicMaterial({color:LIME,transparent:true,opacity:.28});
+function prof(r,L,n=10){const h=L/2-r,p=[];for(let i=0;i<=n;i++){const a=-Math.PI/2+i/n*Math.PI/2;p.push(new T.Vector2(r*Math.cos(a),-h+r*Math.sin(a)))}
+for(let i=0;i<=n;i++){const a=i/n*Math.PI/2;p.push(new T.Vector2(r*Math.cos(a),h+r*Math.sin(a)))}return p}
+const box=(w,h,d,m,x=0,y=0,z=0,p)=>{const o=new T.Mesh(new T.BoxGeometry(w,h,d),m);o.position.set(x,y,z);p&&p.add(o);return o};
+const loop=(pts)=>{const g=new T.BufferGeometry().setFromPoints(pts);return g};
+
+/* labels */
+const LB=[];
+function lab(parent,x,y,z,t,d,s){const o=new T.Object3D();o.position.set(x,y,z);parent.add(o);const el=document.createElement('div');el.className='lb';el.innerHTML='<b>'+t+'</b><span>'+d+'</span>';$('#labels').appendChild(el);LB.push({el,o,s})}
+
+/* microbot */
+const bot=new T.Group(),BL=[];
+const layer=(g,b,o)=>{const l=new T.Group();l.userData={b,o};l.position.y=b;g.add(l);BL.push(l);return l};
+const pts=prof(.4,4);
+[0,1].forEach(h=>{const l=layer(bot,0,h?-1.5:1.7),geo=new T.LatheGeometry(pts,16,h?Math.PI:0,Math.PI);
+ const m=new T.Mesh(geo,shellMat),w=new T.LineSegments(new T.WireframeGeometry(geo),wireMat);m.rotation.z=w.rotation.z=Math.PI/2;l.add(m,w);
+ lab(l,h?1.0:1.0,h?-.3:.3,0,h?'Lower shell':'Sealed shell',h?'Closes with a firm magnetic snap':'40 × 8 mm, continuous wall, no pins','b')});
+{const l=layer(bot,.27,.95),cu=new T.LineBasicMaterial({color:0xffb04a});
+ box(3.2,.012,.55,M(0x3a2a10,{transparent:true,opacity:.85}),0,0,0,l);
+ for(let k=0;k<8;k++){const w=1.55-k*.17,d=.25-k*.028;l.add(new T.LineLoop(loop([new T.Vector3(-w,.01,-d),new T.Vector3(w,.01,-d),new T.Vector3(w,.01,d),new T.Vector3(-w,.01,d)]),cu))}
+ lab(l,1.0,0,0,'Receiver coil','TDK WR202020-18M8-G, 0.5 mm sheet','b')}
+{const l=layer(bot,.04,.3),g=M(0x0d4a30,{roughness:.6}),k=M(0x16191a,{roughness:.3,metalness:.4});
+ box(3.4,.03,.5,g,0,0,0,l);box(.62,.07,.4,k,.55,.05,0,l);box(.3,.05,.3,k,-1,.04,0,l);box(.15,.05,.15,k,-.4,.04,0,l);
+ [-1.5,-.1,1.3,1.5].forEach(x=>box(.08,.03,.05,M(0xcaa24a,{metalness:.8}),x,.03,.15,l));
+ lab(l,1.0,0,0,'Rigid-flex board','ESP32-S3 Mini, STWLC38 charger, 6-axis IMU','b')}
+{const l=layer(bot,-.15,-.65),c=new T.Mesh(new T.CylinderGeometry(.16,.16,2.6,24),M(0xb8c4c8,{metalness:.85,roughness:.3}));c.rotation.z=Math.PI/2;l.add(c);
+ const n=new T.Mesh(new T.CylinderGeometry(.06,.06,.12,12),M(0xcaa24a,{metalness:.9}));n.rotation.z=Math.PI/2;n.position.x=1.34;l.add(n);
+ lab(l,1.0,-.1,0,'LiPo stick cell','3.7 V, 120 mAh','b')}
+sc.add(bot);
+
+/* hub */
+const hub=new T.Group();hub.position.y=0;let HL=[];
+const hl=(b,o)=>{const l=new T.Group();l.userData={b,o};l.position.y=b;hub.add(l);BL.push(l);HL.push(l);return l};
+{const l=hl(-.2,-1.7);box(6.2,.6,3.4,M(0x12171a,{transparent:true,opacity:.55}),0,0,0,l);
+ l.add(new T.LineSegments(new T.EdgesGeometry(new T.BoxGeometry(6.2,.6,3.4)),wireMat));lab(l,2.2,0,1.7,'Hub enclosure','Pinless, sealed housing','h')}
+{const l=hl(-.15,-.95),s=new T.Mesh(new T.CylinderGeometry(.48,.48,.3,32),M(0x1a1d1e,{roughness:.8}));s.position.x=-2.1;l.add(s);
+ const r=new T.Mesh(new T.TorusGeometry(.34,.03,8,32),M(0x555d5a,{metalness:.7}));r.rotation.x=Math.PI/2;r.position.set(-2.1,.16,0);l.add(r);
+ [-.8,-.4,0,.4,.8].forEach((z,i)=>box(.05,.05,.05,M(0x8dff4a,{emissive:0x8dff4a}),2.4,.1,z,l));
+ lab(l,2.4,0,.9,'Voice and audio','I2S microphone array, 3 W speaker','h')}
+{const l=hl(.08,-.25);box(5.6,.04,3,M(0x0d4a30,{roughness:.6}),0,0,0,l);box(.9,.08,.7,M(0x16191a,{metalness:.4,roughness:.3}),-1.4,.06,.5,l);
+ box(.5,.06,.5,M(0x16191a),.8,.05,-.6,l);lab(l,2.4,0,-.6,'Hub controller','ESP32-S3-WROOM-1, Wi-Fi and Bluetooth','h')}
+{const l=hl(.2,.55),cu=new T.LineBasicMaterial({color:0xffb04a});
+ for(let i=0;i<4;i++){const z=-1.05+i*.7;for(let k=1;k<=5;k++){const pp=[];for(let a=0;a<48;a++)pp.push(new T.Vector3(Math.cos(a/48*6.283)*k*.06,0,Math.sin(a/48*6.283)*k*.06+z));l.add(new T.LineLoop(loop(pp),cu))}}
+ lab(l,.45,0,1.05,'Transmitter coils','One bay under each cradle, centred on the bot coil','h')}
+{const l=hl(.4,1.45);box(6.2,.14,3.4,M(0x1b2124,{roughness:.35,metalness:.3}),0,0,0,l);
+ const gp=prof(.31,4.15),dp=prof(.27,4.1);
+ for(let i=0;i<4;i++){const z=-1.05+i*.7;
+  [[gp,new T.MeshBasicMaterial({color:LIME}),.072],[dp,new T.MeshBasicMaterial({color:0x040604}),.08]].forEach(([pp,mm,y])=>{const o=new T.Mesh(new T.LatheGeometry(pp,24),mm);o.rotation.z=Math.PI/2;o.scale.set(.3,1,1);o.position.set(0,y,z);l.add(o)})}
+ lab(l,2.7,.07,-1.05,'Nesting tray','Cradles match the bot profile','h')}
+hub.position.set(0,0,0);sc.add(hub);
+
+/* swarm */
+const sw=new T.Group(),bots=[],N=12;
+const bm=M(0x7dff3f,{emissive:0x2a8a10,emissiveIntensity:.4,roughness:.35});
+const sp=prof(.55,3),slp=prof(.17,1.6),dk=new T.MeshBasicMaterial({color:0x050805});
+for(let i=0;i<N;i++){const g=new T.Group(),c=new T.Group();
+ const b=new T.Mesh(new T.LatheGeometry(sp,24),bm);b.rotation.z=Math.PI/2;b.scale.set(1,1,.7);
+ const s=new T.Mesh(new T.LatheGeometry(slp,16),dk);s.rotation.z=Math.PI/2;s.scale.set(1,1,.25);s.position.z=.385;
+ c.add(b,s);g.add(c);g.scale.setScalar(.55);g.userData.c=c;g.position.set((Math.random()-.5)*20,(Math.random()-.5)*10,(Math.random()-.5)*10);bots.push(g);sw.add(g)}
+sc.add(sw);
+const X=new T.Vector3(1,0,0),qz=a=>new T.Quaternion().setFromAxisAngle(new T.Vector3(0,0,1),a),qd=d=>new T.Quaternion().setFromUnitVectors(X,d.clone().normalize());
+const F={};
+F.Mark=[...Array(N)].map((_,i)=>{const t=.55+i/(N-1)*(2*Math.PI-1.1);return{p:new T.Vector3(4.4*Math.cos(t),4.4*Math.sin(t),0),q:qz(t+Math.PI/2)}});
+F.Ring=[...Array(N)].map((_,i)=>{const t=i/N*2*Math.PI;return{p:new T.Vector3(4*Math.cos(t),0,4*Math.sin(t)),q:qd(new T.Vector3(-Math.sin(t),0,Math.cos(t)))}});
+{const V=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(a=>new T.Vector3(...a).multiplyScalar(2.7)),o=[];
+ for(let i=0;i<4;i++)for(let j=i+1;j<4;j++)[.3,.7].forEach(f=>o.push({p:V[i].clone().lerp(V[j],f),q:qd(V[j].clone().sub(V[i]))}));F.Tetra=o}
+F.Grid=[...Array(N)].map((_,i)=>({p:new T.Vector3((i%6-2.5)*2.1,(i<6?.8:-.8),0),q:new T.Quaternion()}));
+const CMD={Mark:['"show the logo"','MARK'],Ring:['"make a circle"','RING'],Tetra:['"make a pyramid"','TETRAHEDRON'],Grid:['"line them up"','GRID']};
+let sel='Mark';
+function setCmd(){$('#cmd').innerHTML='Hub hears <b>'+CMD[sel][0]+'</b>, parses it to <b>'+CMD[sel][1]+'</b>, and sends 12 targets to the mesh.'}setCmd();
+document.querySelectorAll('.fm button').forEach(b=>b.onclick=()=>{sel=b.dataset.f;document.querySelectorAll('.fm button').forEach(x=>x.classList.toggle('on',x===b));setCmd()});
+
+/* ambience */
+const dg=new Float32Array(1500);for(let i=0;i<1500;i++)dg[i]=(Math.random()-.5)*(i%3==1?24:50);
+const dust=new T.Points(new T.BufferGeometry().setAttribute('position',new T.BufferAttribute(dg,3)),new T.PointsMaterial({color:LIME,size:.07,transparent:true,opacity:.45,depthWrite:false,blending:T.AdditiveBlending}));sc.add(dust);
+const grid=new T.GridHelper(80,80,0x244a14,0x0f1f0a);grid.position.y=-5;grid.material.transparent=true;grid.material.opacity=.5;sc.add(grid);
+
+/* scroll, camera, loop */
+const CAP=['Fig. 1  Swarm forming the mark','Fig. 2  Microbot, exploded','Fig. 3  Charging hub, exploded','Fig. 4  Formation planner','Fig. 5  Specification and plan'];
+const K=[[0,.5,14],[4.2,2.4,7.2],[-3.6,4.2,8.6],[0,3.2,15],[7,3.5,14]];
+const nav=$('#nav');K.forEach((_,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Go to section '+(i+1));b.onclick=()=>$('#s'+i).scrollIntoView({behavior:'smooth'});nav.appendChild(b)});
+let S=0,yaw=0,yawT=0,last=-1;
+const wt=(s,i)=>cl(1.6-2*Math.abs(s-i),0,1),v=new T.Vector3(),tgt=new T.Vector3();
+function resize(){const w=innerWidth,h=innerHeight;R.setSize(w,h);cam.aspect=w/h;if(w>900)cam.setViewOffset(w,h,-w*.08,0,w,h);else cam.clearViewOffset();cam.updateProjectionMatrix()}
+addEventListener('resize',resize);resize();
+addEventListener('pointermove',e=>{if(e.buttons&1&&!e.target.closest('button,input'))yawT+=e.movementX*.008});
+function frame(ms){
+ const t=ms*.001,raw=scrollY/innerHeight;S+=(Math.min(raw,4)-S)*.07;
+ const i=Math.min(Math.floor(S),3),f=ss(S-i);
+ const a=K[i],b=K[Math.min(i+1,4)];
+ cam.position.set(a[0]+(b[0]-a[0])*f+Math.sin(t*.21)*.6,a[1]+(b[1]-a[1])*f+Math.cos(t*.17)*.3,a[2]+(b[2]-a[2])*f);
+ cam.lookAt(0,0,0);
+ yaw+=(yawT-yaw)*.08;
+ const ex=+$('#ex').value,wB=wt(S,1),wH=wt(S,2),wS=Math.max(wt(S,0),wt(S,3),wt(S,4));
+ bot.visible=wB>.02;hub.visible=wH>.02;sw.visible=wS>.02;
+ bot.scale.setScalar(.6+.4*ss(wB));hub.scale.setScalar(.6+.4*ss(wH));sw.scale.setScalar(.6+.4*ss(wS));
+ bot.rotation.set(.15,yaw+t*.12,0);hub.rotation.set(.32,yaw*.6+Math.sin(t*.15)*.2-.4,0);
+ const eB=ex*ss(wB),eH=ex*ss(wH);
+ BL.forEach(l=>{const e=hub.children.includes(l)?eH:eB;l.position.y=l.userData.b+l.userData.o*e});
+ const form=S<2?'Mark':sel;
+ bots.forEach((g,n)=>{const q=F[form][n];g.position.lerp(q.p,.05);g.quaternion.slerp(q.q,.05);g.userData.c.position.y=Math.sin(t*1.4+n)*.1});
+ sw.rotation.y=yaw+(form=='Mark'?Math.sin(t*.3)*.18:t*.1);
+ dust.rotation.y=t*.01;
+ LB.forEach(l=>{const w=l.s=='b'?wB:wH,e=l.s=='b'?eB:eH;l.o.getWorldPosition(v);v.project(cam);
+  l.el.style.transform='translate('+((v.x*.5+.5)*innerWidth)+'px,'+((-v.y*.5+.5)*innerHeight)+'px) translateY(-50%)';
+  l.el.style.opacity=cl((e-.45)*2.2)*ss(w)});
+ const n=Math.round(S);if(n!==last){last=n;$('#cap').textContent=CAP[n];[...nav.children].forEach((b,k)=>b.classList.toggle('on',k===n))}
+ $('#exw').style.opacity=(wB>.6||wH>.6)?1:0;
+ R.render(sc,cam);requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+setTimeout(()=>document.body.classList.add('ready'),100);
+</script>
+</body>
+</html>
